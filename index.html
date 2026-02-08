@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>..:: Mapa Info-USAC ::..</title>
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Sistema interactivo de rutas guiadas para Info-USAC.">
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <header class="header">
+                <h1>Mapa guia de Info-USAC</h1>
+                <p>Selecciona tu destino desde <strong>Rectoría</strong></p>
+            </header>
+
+            <nav class="destinations">
+                <div class="destination-group">
+                    <div class="mobile-select-wrapper">
+                        <select id="destination-select" class="mobile-only">
+                            <option value="">-- Selecciona un destino --</option>
+                            <!-- Opciones se cargarán dinámicamente -->
+                        </select>
+                    </div>
+                    <ul id="destination-list" class="desktop-only">
+                        <!-- Destinos se cargarán dinámicamente -->
+                    </ul>
+                </div>
+            </nav>
+
+            <footer class="sidebar-footer">
+                <p>&copy; 2026 Chalecos Cafe</p>
+            </footer>
+        </aside>
+
+        <main class="map-section">
+            <div id="map"></div>
+            <div id="directions-panel" class="directions-panel hidden">
+                <div class="panel-header">
+                    <h3>Indicaciones</h3>
+                    <button id="close-panel">&times;</button>
+                </div>
+                <div id="steps-content"></div>
+            </div>
+
+            <div id="unauthorized-overlay" class="overlay hidden">
+                <div class="overlay-content">
+                    <h2>API Key Requerida</h2>
+                    <p>Por favor, configura tu Google Maps API Key en el archivo <code>app.js</code> para visualizar el
+                        mapa.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="safety-warning" class="safety-warning hidden">
+        <div class="warning-icon">🚶</div>
+        <p>¡Camina con cuidado! No te distraigas con el celular mientras avanzas.</p>
+    </div>
+
+    <!-- Cargar configuración primero -->
+    <script src="./assets/config.js"></script>
+    <script src="./assets/app.js"></script>
+</body>
+
+</html>
