@@ -63,13 +63,30 @@ body {
     text-align: center;
 }
 
+.brand-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 0.8rem;
+}
+
+.app-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: var(--shadow-soft);
+    object-fit: cover;
+    background: white;
+    padding: 2px;
+}
+
 .header h1 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
     color: var(--accent-gold);
     text-transform: lowercase;
-    /* Matches user request for 'mapa guia de Info-usac' lowercase style if they manually type it, but here we force lowercase look if needed. Actually user typed 'mapa guia de Info-usac' in HTML. */
 }
 
 .header p {
@@ -300,7 +317,9 @@ body {
     }
 
     .sidebar-footer {
-        display: none;
+        display: block;
+        padding: 1rem 0;
+        opacity: 0.8;
     }
 
     .directions-panel {

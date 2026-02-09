@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./assets/logo.png">
     <meta name="description" content="Sistema interactivo de rutas guiadas para Info-USAC.">
 </head>
 
@@ -16,7 +17,10 @@
     <div class="app-container">
         <aside class="sidebar">
             <header class="header">
-                <h1>Mapa guia de Info-USAC</h1>
+                <div class="brand-container">
+                    <img src="./assets/logo.png" alt="Info-USAC Logo" class="app-logo">
+                    <h1>Mapa guia de Info-USAC</h1>
+                </div>
                 <p>Selecciona tu destino desde <strong>Rectoría</strong></p>
             </header>
 
@@ -32,22 +36,16 @@
                         <!-- Destinos se cargarán dinámicamente -->
                     </ul>
                 </div>
+                <!-- Footer movido aquí para visibilidad en móviles -->
+                <footer class="sidebar-footer">
+                    <p>&copy; 2026 Chalecos Cafe</p>
+                </footer>
             </nav>
-
-            <footer class="sidebar-footer">
-                <p>&copy; 2026 Chalecos Cafe</p>
-            </footer>
         </aside>
 
         <main class="map-section">
             <div id="map"></div>
-            <div id="directions-panel" class="directions-panel hidden">
-                <div class="panel-header">
-                    <h3>Indicaciones</h3>
-                    <button id="close-panel">&times;</button>
-                </div>
-                <div id="steps-content"></div>
-            </div>
+
 
             <div id="unauthorized-overlay" class="overlay hidden">
                 <div class="overlay-content">
@@ -61,7 +59,7 @@
 
     <div id="safety-warning" class="safety-warning hidden">
         <div class="warning-icon">🚶</div>
-        <p>¡Camina con cuidado! No te distraigas con el celular mientras avanzas.</p>
+        <p>¡Camina con cuidado!</p>
     </div>
 
     <!-- Cargar configuración primero -->

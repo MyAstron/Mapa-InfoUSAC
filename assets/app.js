@@ -164,7 +164,7 @@ function calculateAndDisplayRoute(destination) {
             if (status === "OK") {
                 console.log("Ruta calculada con éxito.");
                 directionsRenderer.setDirections(response);
-                document.getElementById('directions-panel').classList.remove('hidden');
+                // document.getElementById('directions-panel').classList.remove('hidden'); // Eliminado por solicitud del usuario
                 // Mostrar aviso de seguridad
                 const safetyWarning = document.getElementById('safety-warning');
                 safetyWarning.classList.remove('hidden');
@@ -190,9 +190,11 @@ function updateActiveState(elementOrId) {
 }
 
 function setupEventListeners() {
+    /* 
     document.getElementById('close-panel').addEventListener('click', () => {
         document.getElementById('directions-panel').classList.add('hidden');
     });
+    */
 
     // Mobile Select handling
     const select = document.getElementById('destination-select');
