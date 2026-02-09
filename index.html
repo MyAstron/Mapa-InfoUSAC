@@ -24,8 +24,14 @@
                 <p>Selecciona tu destino desde <strong>Rectoría</strong></p>
             </header>
 
+            <div class="mode-switcher">
+                <button id="btn-auditorios" class="mode-btn active">Auditorios</button>
+                <button id="btn-recorridos" class="mode-btn">Recorridos</button>
+            </div>
+
             <nav class="destinations">
-                <div class="destination-group">
+                <!-- Modo Auditorios -->
+                <div id="section-auditorios" class="destination-group">
                     <div class="mobile-select-wrapper">
                         <select id="destination-select" class="mobile-only">
                             <option value="">-- Selecciona un destino --</option>
@@ -35,6 +41,19 @@
                     <ul id="destination-list" class="desktop-only">
                         <!-- Destinos se cargarán dinámicamente -->
                     </ul>
+                </div>
+
+                <!-- Modo Recorridos -->
+                <div id="section-recorridos" class="destination-group hidden">
+                    <div class="tour-helper">
+                        <p>Visita estos puntos clave. El sistema te guiará al más cercano.</p>
+                        <ul id="tour-checklist" class="checklist">
+                            <!-- Items de recorrido se cargarán aquí -->
+                        </ul>
+                        <div id="tour-final" class="final-step hidden">
+                            <button id="btn-return-pb" class="primary-btn">Finalizar en Plaza las Banderas</button>
+                        </div>
+                    </div>
                 </div>
                 <!-- Footer movido aquí para visibilidad en móviles -->
                 <footer class="sidebar-footer">
