@@ -23,49 +23,56 @@ const CONFIG = {
             name: "Auditorio Francisco Vela (T6)",
             buildingCode: "T6",
             location: { lat: 14.587154601902279, lng: -90.5532238280715 },
-            description: "Facultad de Ingeniería"
+            description: "Facultad de Ingeniería",
+            walkingTime: "6 min"
         },
         {
             id: 2,
             name: "Iglú",
             buildingCode: "Iglú",
             location: { lat: 14.585995536934064, lng: -90.55343753777946 },
-            description: "Plaza Central / Área Estudiantil"
+            description: "Plaza Central / Área Estudiantil",
+            walkingTime: "7 min"
         },
         {
             id: 3,
             name: "Arquitectura (T2)",
             buildingCode: "T2",
             location: { lat: 14.588564113802146, lng: -90.55267019148421 },
-            description: "Facultad de Arquitectura"
+            description: "Facultad de Arquitectura",
+            walkingTime: "4 min"
         },
         {
             id: 4,
             name: "Odontología (M4)",
             buildingCode: "M4",
             location: { lat: 14.587934621852428, lng: -90.54911038942205 },
-            description: "Facultad de Odontología"
+            description: "Facultad de Odontología",
+            walkingTime: "5 min"
         },
         {
             id: 5,
             name: "Escuela de Ciencia Política (M5)",
             buildingCode: "M5",
             location: { lat: 14.58759078030367, lng: -90.55040634330211 },
-            description: "Edificio M-5"
+            description: "Edificio M-5",
+            walkingTime: "3 min"
         },
         {
             id: 6,
             name: "S-4",
             buildingCode: "S4",
             location: { lat: 14.586832424250957, lng: -90.55076631075259 },
-            description: "Salones y Aulas S-4"
+            description: "Salones y Aulas S-4",
+            walkingTime: "5 min"
         },
         {
             id: 7,
             name: "Ciencias Económicas (S8)",
             buildingCode: "S8",
             location: { lat: 14.586208371908686, lng: -90.54987009142148 },
-            description: "Edificio S-8"
+            description: "Edificio S-8",
+            walkingTime: "7 min"
         }
     ],
     tourSpots: [
@@ -131,17 +138,18 @@ function initMap() {
 
 function tryToGetLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
+        navigator.geolocation.watchPosition(
             (position) => {
                 userLocation = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
                 if (currentMode === 'recorridos') {
-                    checkTourProgress(); // Recalcular al obtener ubicación si estamos en tour
+                    checkTourProgress();
                 }
             },
-            () => console.log("Permiso de ubicación denegado.")
+            () => console.log("Error al obtener ubicación técnica."),
+            { enableHighAccuracy: true }
         );
     }
 }
@@ -175,7 +183,13 @@ function renderDestinationList() {
         const li = document.createElement('li');
         li.className = 'destination-item';
         li.dataset.id = dest.id;
-        li.innerHTML = `<h3>${dest.name}</h3><p>${dest.description}</p>`;
+        li.innerHTML = `
+            <div class="dest-title">
+                <h3>${dest.name}</h3>
+                <span class="walking-time">${dest.walkingTime}</span>
+            </div>
+            <p>${dest.description}</p>
+        `;
         li.addEventListener('click', () => {
             // Auditorio: Origen fijo Plaza las Banderas
             calculateAndDisplayRoute(CONFIG.startLocation, dest, "Plaza las Banderas");
@@ -185,7 +199,7 @@ function renderDestinationList() {
 
         const option = document.createElement('option');
         option.value = dest.id;
-        option.textContent = dest.name;
+        option.textContent = `${dest.name} (${dest.walkingTime})`;
         select.appendChild(option);
     });
 }
@@ -218,6 +232,25 @@ function renderTourList() {
 }
 
 function checkTourProgress() {
+    // Auto-check si el usuario está cerca de algún punto (umbral aprox 30m)
+    const PROXIMITY_THRESHOLD = 0.0003;
+    let changed = false;
+
+    CONFIG.tourSpots.forEach(spot => {
+        if (!spot.completed) {
+            const distance = getDist(userLocation, spot.location);
+            if (distance < PROXIMITY_THRESHOLD) {
+                spot.completed = true;
+                changed = true;
+                console.log(`Auto-marcado: ${spot.name}`);
+            }
+        }
+    });
+
+    if (changed) {
+        renderTourList();
+    }
+
     const pending = CONFIG.tourSpots.filter(s => !s.completed);
     const allDone = pending.length === 0;
 
