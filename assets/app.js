@@ -24,7 +24,8 @@ const CONFIG = {
             buildingCode: "T6",
             location: { lat: 14.587154601902279, lng: -90.5532238280715 },
             description: "Facultad de Ingeniería",
-            walkingTime: "6 min"
+            walkingTime: "6 min",
+            visible: true
         },
         {
             id: 2,
@@ -32,7 +33,8 @@ const CONFIG = {
             buildingCode: "Iglú",
             location: { lat: 14.585995536934064, lng: -90.55343753777946 },
             description: "Plaza Central / Área Estudiantil",
-            walkingTime: "7 min"
+            walkingTime: "7 min",
+            visible: false
         },
         {
             id: 3,
@@ -40,7 +42,8 @@ const CONFIG = {
             buildingCode: "T2",
             location: { lat: 14.588564113802146, lng: -90.55267019148421 },
             description: "Facultad de Arquitectura",
-            walkingTime: "4 min"
+            walkingTime: "4 min",
+            visible: true
         },
         {
             id: 4,
@@ -48,7 +51,8 @@ const CONFIG = {
             buildingCode: "M4",
             location: { lat: 14.587934621852428, lng: -90.54911038942205 },
             description: "Facultad de Odontología",
-            walkingTime: "5 min"
+            walkingTime: "5 min",
+            visible: true
         },
         {
             id: 5,
@@ -56,7 +60,8 @@ const CONFIG = {
             buildingCode: "M5",
             location: { lat: 14.58759078030367, lng: -90.55040634330211 },
             description: "Edificio M-5",
-            walkingTime: "3 min"
+            walkingTime: "3 min",
+            visible: true
         },
         {
             id: 6,
@@ -64,15 +69,17 @@ const CONFIG = {
             buildingCode: "S4",
             location: { lat: 14.586832424250957, lng: -90.55076631075259 },
             description: "Salones y Aulas S-4",
-            walkingTime: "5 min"
+            walkingTime: "5 min",
+            visible: true
         },
         {
             id: 7,
-            name: "Ciencias Económicas (S8)",
+            name: "Ciencias Económicas (S8, 109)",
             buildingCode: "S8",
             location: { lat: 14.586208371908686, lng: -90.54987009142148 },
-            description: "Edificio S-8",
-            walkingTime: "7 min"
+            description: "Edificio S-8, salon 109",
+            walkingTime: "7 min",
+            visible: true
         }
     ],
     tourSpots: [
@@ -134,6 +141,15 @@ function initMap() {
     renderDestinationList();
     renderTourList();
     setupEventListeners();
+
+    // Colocar marcadores permanentes
+    const sunSpot = CONFIG.tourSpots.find(s => s.id === 'sun');
+    if (sunSpot) {
+        createCustomMarker(sunSpot.location, sunSpot.buildingCode, sunSpot.name);
+    }
+
+    // Marcador permanente de Plaza de las Banderas (P.B.)
+    createCustomMarker(CONFIG.startLocation, "P.B.", "Plaza las Banderas");
 }
 
 function tryToGetLocation() {
@@ -180,6 +196,9 @@ function renderDestinationList() {
     select.innerHTML = '<option value="">-- Selecciona un destino --</option>';
 
     CONFIG.destinations.forEach(dest => {
+        // Solo renderizar si es visible
+        if (dest.visible === false) return;
+
         const li = document.createElement('li');
         li.className = 'destination-item';
         li.dataset.id = dest.id;

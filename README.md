@@ -11,6 +11,13 @@ Sistema interactivo de rutas universitarias diseñado para el campus central de 
 - **Mapa Limpio y Seguro:** Visualización simplificada sin distracciones externas y avisos de seguridad activos durante la navegación.
 - **Privacidad de API:** Sistema de carga dinámica de credenciales con protección contra caché (Cache Busting).
 
+## 🎬 Demostración de Uso
+![Grabación de uso](./assets/usage_demo.webp)
+*Vista rápida del funcionamiento en escritorio y móvil.*
+
+![Vista Móvil](./assets/mobile_view.png)
+*Interfaz optimizada para dispositivos móviles.*
+
 ## 📁 Estructura del Código
 - `index.html`: Estructura base con selector de modos y contenedores dinámicos.
 - `assets/style.css`: Diseño premium, sistema de glassmorphism y adaptabilidad móvil total.
