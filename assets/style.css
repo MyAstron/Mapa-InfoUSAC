@@ -269,6 +269,19 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
+.checklist-item.disabled {
+    cursor: not-allowed;
+}
+
+.checklist-item.disabled:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.checklist-main.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
 .checklist-item.completed {
     opacity: 0.5;
     background: rgba(0, 255, 0, 0.1);

@@ -16,7 +16,7 @@
 })();
 
 const CONFIG = {
-    startLocation: { lat: 14.588530590037978, lng: -90.55140598811853 }, // Rectoría / Plaza de las Banderas
+    startLocation: { lat: 14.588539493011783, lng: -90.55130782710258 }, // Rectoría / Plaza de las Banderas
     destinations: [
         {
             id: 1,
@@ -49,10 +49,22 @@ const CONFIG = {
             id: 4,
             name: "Odontología (M4)",
             buildingCode: "M4",
-            location: { lat: 14.587934621852428, lng: -90.54911038942205 },
+            location: { lat: 14.588092245794074, lng: -90.54916937057705 },
             description: "Facultad de Odontología",
             walkingTime: "5 min",
-            visible: true
+            visible: true,
+            customPath: [
+                { lat: 14.58849374167678, lng: -90.55103140486266 },
+                { lat: 14.588362430213692, lng: -90.55102688199676 },
+                { lat: 14.588229659654715, lng: -90.54998662284339 },
+                { lat: 14.588324495776439, lng: -90.54993687131868 },
+                { lat: 14.588283361659169, lng: -90.54992520421627 },
+                { lat: 14.58833657425039, lng: -90.54989502936131 },
+                { lat: 14.588338521052222, lng: -90.54988362997271 },
+                { lat: 14.58828401059545, lng: -90.54989435880522 },
+                { lat: 14.588180830047763, lng: -90.54932975380375 },
+                { lat: 14.588104904709166, lng: -90.5493398120878 }
+            ]
         },
         {
             id: 5,
@@ -61,7 +73,19 @@ const CONFIG = {
             location: { lat: 14.58759078030367, lng: -90.55040634330211 },
             description: "Edificio M-5",
             walkingTime: "3 min",
-            visible: true
+            visible: true,
+            customPath: [
+                { lat: 14.588233845187478, lng: -90.5513648240447 },
+                { lat: 14.588173988410558, lng: -90.55107238033939 },
+                { lat: 14.587809286954716, lng: -90.55110657850442 },
+                { lat: 14.587741148716548, lng: -90.55100532511163 },
+                { lat: 14.58768209555735, lng: -90.5509268705002 },
+                { lat: 14.587612659407654, lng: -90.55086585024362 },
+                { lat: 14.58755230834387, lng: -90.55079745391207 },
+                { lat: 14.587586701962888, lng: -90.55068211892159 },
+                { lat: 14.587576967920324, lng: -90.55061104038093 },
+                { lat: 14.587510127483016, lng: -90.55052990355624 }
+            ]
         },
         {
             id: 6,
@@ -70,7 +94,21 @@ const CONFIG = {
             location: { lat: 14.586832424250957, lng: -90.55076631075259 },
             description: "Salones y Aulas S-4",
             walkingTime: "5 min",
-            visible: true
+            visible: true,
+            customPath: [
+                { lat: 14.588233845187478, lng: -90.5513648240447 },
+                { lat: 14.588173988410558, lng: -90.55107238033939 },
+                { lat: 14.587809286954716, lng: -90.55110657850442 },
+                { lat: 14.587741148716548, lng: -90.55100532511163 },
+                { lat: 14.58768209555735, lng: -90.5509268705002 },
+                { lat: 14.587612659407654, lng: -90.55086585024362 },
+                { lat: 14.58755230834387, lng: -90.55079745391207 },
+                { lat: 14.587586701962888, lng: -90.55068211892159 },
+                { lat: 14.587576967920324, lng: -90.55061104038093 },
+                { lat: 14.587510127483016, lng: -90.55052990355624 },
+                { lat: 14.587436797652476, lng: -90.55051246920286 },
+                { lat: 14.586812394639189, lng: -90.55059504167194 }
+            ]
         },
         {
             id: 7,
@@ -79,7 +117,23 @@ const CONFIG = {
             location: { lat: 14.586208371908686, lng: -90.54987009142148 },
             description: "Edificio S-8, salon 109",
             walkingTime: "7 min",
-            visible: true
+            visible: true,
+            customPath: [
+                { lat: 14.588233845187478, lng: -90.5513648240447 },
+                { lat: 14.588173988410558, lng: -90.55107238033939 },
+                { lat: 14.587809286954716, lng: -90.55110657850442 },
+                { lat: 14.587741148716548, lng: -90.55100532511163 },
+                { lat: 14.58768209555735, lng: -90.5509268705002 },
+                { lat: 14.587612659407654, lng: -90.55086585024362 },
+                { lat: 14.58755230834387, lng: -90.55079745391207 },
+                { lat: 14.587586701962888, lng: -90.55068211892159 },
+                { lat: 14.587576967920324, lng: -90.55061104038093 },
+                { lat: 14.587510127483016, lng: -90.55052990355624 },
+                { lat: 14.587436797652476, lng: -90.55051246920286 },
+                { lat: 14.586563732008228, lng: -90.55061893873227 },
+                { lat: 14.58647008803916, lng: -90.55010780354156 },
+                { lat: 14.586213393184098, lng: -90.55015789251817 }
+            ]
         },
         {
             id: 8,
@@ -88,7 +142,23 @@ const CONFIG = {
             location: { lat: 14.586204011811052, lng: -90.5502677026757 },
             description: "Edificio S-7",
             walkingTime: "7 min",
-            visible: true
+            visible: true,
+            customPath: [
+                { lat: 14.588233845187478, lng: -90.5513648240447 },
+                { lat: 14.588173988410558, lng: -90.55107238033939 },
+                { lat: 14.587809286954716, lng: -90.55110657850442 },
+                { lat: 14.587741148716548, lng: -90.55100532511163 },
+                { lat: 14.58768209555735, lng: -90.5509268705002 },
+                { lat: 14.587612659407654, lng: -90.55086585024362 },
+                { lat: 14.58755230834387, lng: -90.55079745391207 },
+                { lat: 14.587586701962888, lng: -90.55068211892159 },
+                { lat: 14.587576967920324, lng: -90.55061104038093 },
+                { lat: 14.587510127483016, lng: -90.55052990355624 },
+                { lat: 14.587436797652476, lng: -90.55051246920286 },
+                { lat: 14.586563732008228, lng: -90.55061893873227 },
+                { lat: 14.58647008803916, lng: -90.55010780354156 },
+                { lat: 14.586213393184098, lng: -90.55015789251817 }
+            ]
         }
     ],
     tourSpots: [
@@ -104,7 +174,7 @@ const CONFIG = {
             id: 'bienestar',
             name: "Bienestar Estudiantil",
             buildingCode: "B.E",
-            location: { lat: 14.58720002994269, lng: -90.55072724583526 },
+            location: { lat: 14.58726143280953, lng: -90.55106898099945 },
             completed: false,
             info: "Encargado de becas, apoyo psicopedagógico y programas deportivos."
         },
@@ -112,9 +182,17 @@ const CONFIG = {
             id: 'rye',
             name: "RYE (Registro) / DIGA",
             buildingCode: "RYE",
-            location: { lat: 14.588048349592093, lng: -90.55072829187868 },
+            location: { lat: 14.58810341856587, lng: -90.55107019613135 },
             completed: false,
             info: "Trámites de inscripción, certificaciones y carnés universitarios."
+        },
+        {
+            id: 'martires',
+            name: "Plaza los Mártires (Entrada)",
+            buildingCode: "P.M.",
+            location: { lat: 14.587974147238498, lng: -90.55145296114145 },
+            completed: false,
+            info: "Punto final del recorrido y área central de eventos al lado de Rectoría."
         }
     ]
 };
@@ -126,7 +204,9 @@ let startMarker;
 let endMarker;
 let userLocation = CONFIG.startLocation;
 let currentMode = 'auditorios';
-let globalOrigin = 'default'; // 'default' or 'user'
+let globalOrigin = localStorage.getItem('globalOrigin') || 'default'; // 'default' or 'user'
+let locationTrackingActive = localStorage.getItem('locationTrackingActive') === 'true';
+let customPolyline = null;
 
 function initMap() {
     directionsService = new google.maps.DirectionsService();
@@ -145,6 +225,7 @@ function initMap() {
         disableDefaultUI: false,
         mapTypeControl: false,
         streetViewControl: false,
+        mapTypeId: "terrain",
         styles: [
             { "featureType": "poi", "elementType": "all", "stylers": [{ "visibility": "off" }] }
         ]
@@ -163,12 +244,25 @@ function initMap() {
 
     // Marcador permanente de Plaza de las Banderas (P.B.)
     createCustomMarker(CONFIG.startLocation, "P.B.", "Plaza las Banderas");
+
+    // Initialize UI state based on stored preferences
+    if (globalOrigin === 'user') {
+        document.getElementById('btn-origin-user').classList.add('active');
+        document.getElementById('btn-origin-default').classList.remove('active');
+    }
+
+    // Resume tracking if it was active previously
+    if (locationTrackingActive) {
+        tryToGetLocation();
+    }
 }
 
 function tryToGetLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.watchPosition(
             (position) => {
+                locationTrackingActive = true;
+                localStorage.setItem('locationTrackingActive', 'true');
                 userLocation = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
@@ -244,12 +338,18 @@ function renderTourList() {
     if (!list) return;
     list.innerHTML = '';
 
+    let foundPending = false;
     CONFIG.tourSpots.forEach(spot => {
+        const isCurrentActive = !spot.completed && !foundPending;
+        if (!spot.completed) foundPending = true;
+
+        const disabledClass = (!spot.completed && !isCurrentActive) ? 'disabled' : '';
+
         const li = document.createElement('li');
-        li.className = `checklist-item ${spot.completed ? 'completed' : ''}`;
+        li.className = `checklist-item ${spot.completed ? 'completed' : ''} ${disabledClass}`;
         li.innerHTML = `
-            <div class="checklist-main">
-                <input type="checkbox" ${spot.completed ? 'checked' : ''}>
+            <div class="checklist-main ${disabledClass}">
+                <input type="checkbox" ${spot.completed ? 'checked' : ''} ${disabledClass ? 'disabled' : ''}>
                 <span>${spot.name}</span>
             </div>
             <div class="info-wrapper">
@@ -259,6 +359,10 @@ function renderTourList() {
         `;
 
         li.addEventListener('click', (e) => {
+            if (!spot.completed && !isCurrentActive && !e.target.classList.contains('tour-info-btn') && !li.querySelector('.tour-tooltip').contains(e.target)) {
+                return; // Prevent interaction if disabled and not clicking info
+            }
+
             const checkbox = li.querySelector('input');
             const infoBtn = li.querySelector('.tour-info-btn');
             const tooltip = li.querySelector('.tour-tooltip');
@@ -273,7 +377,22 @@ function renderTourList() {
             }
 
             spot.completed = checkbox.checked;
-            li.classList.toggle('completed', spot.completed);
+
+            // Si desmarcamos un punto, obligatoriamente debemos desmarcar todos los siguientes
+            if (!spot.completed) {
+                let foundCurrent = false;
+                CONFIG.tourSpots.forEach(s => {
+                    if (foundCurrent) {
+                        s.completed = false;
+                    }
+                    if (s.id === spot.id) {
+                        foundCurrent = true;
+                    }
+                });
+            }
+
+            // Re-render completely to update disabled states downstream
+            renderTourList();
             checkTourProgress();
         });
 
@@ -303,20 +422,19 @@ function renderTourList() {
 }
 
 function checkTourProgress() {
-    // Auto-check si el usuario está cerca de algún punto (umbral aprox 30m)
+    // Auto-check si el usuario está cerca del PUNTO ACTUAL en la ruta (umbral aprox 30m)
     const PROXIMITY_THRESHOLD = 0.0003;
     let changed = false;
 
-    CONFIG.tourSpots.forEach(spot => {
-        if (!spot.completed) {
-            const distance = getDist(userLocation, spot.location);
-            if (distance < PROXIMITY_THRESHOLD) {
-                spot.completed = true;
-                changed = true;
-                console.log(`Auto-marcado: ${spot.name}`);
-            }
+    const currentSpot = CONFIG.tourSpots.find(s => !s.completed);
+    if (currentSpot) {
+        const distance = getDist(userLocation, currentSpot.location);
+        if (distance < PROXIMITY_THRESHOLD) {
+            currentSpot.completed = true;
+            changed = true;
+            console.log(`Auto-marcado: ${currentSpot.name}`);
         }
-    });
+    }
 
     if (changed) {
         renderTourList();
@@ -328,15 +446,11 @@ function checkTourProgress() {
     document.getElementById('tour-final').classList.toggle('hidden', !allDone);
 
     if (!allDone) {
-        // Sugerir el más cercano de los pendientes
-        // Siempre usamos userLocation para buscar el "más cercano", 
-        // pero el origen de la ruta respetará el selector global si es necesario.
-        const nearest = findNearest(userLocation, pending);
-        if (nearest) {
-            const origin = globalOrigin === 'default' ? CONFIG.startLocation : userLocation;
-            const originName = globalOrigin === 'default' ? "P.B." : "Tú";
-            calculateAndDisplayRoute(origin, nearest, originName);
-        }
+        // Sugerir el siguiente en la ruta obligatoria
+        const nextSpot = pending[0];
+        const origin = globalOrigin === 'default' ? CONFIG.startLocation : userLocation;
+        const originName = globalOrigin === 'default' ? "P.B." : "Tú";
+        calculateAndDisplayRoute(origin, nextSpot, originName);
     } else {
         // Si todo está completo, volver a Plaza las Banderas
         // Si ya estamos en Plaza las Banderas (default origin), no hace falta mostrar ruta DE Plaza las Banderas A Plaza las Banderas
@@ -372,7 +486,36 @@ function getDist(p1, p2) {
 function calculateAndDisplayRoute(origin, destInfo, originName) {
     if (!destInfo) return;
 
+    // Si tiene un camino manual definido, lo dibujamos a mano
+    if (destInfo.customPath && destInfo.customPath.length > 0) {
+        clearMap();
 
+        // Si el origen NO es Rectoría/Plaza, lo conectamos también (opcional)
+        // Para rutas fijas como la de S-4 es mejor si inicia desde PB
+        const pathLine = [origin, ...destInfo.customPath, destInfo.location];
+
+        customPolyline = new google.maps.Polyline({
+            path: pathLine,
+            geodesic: true,
+            strokeColor: "#003366",
+            strokeOpacity: 0.7,
+            strokeWeight: 6,
+            map: map
+        });
+
+        startMarker = createCustomMarker(origin, originName === "Tú" ? "Tú" : "P.B.", originName);
+        endMarker = createCustomMarker(destInfo.location, destInfo.buildingCode, destInfo.name);
+
+        const bounds = new google.maps.LatLngBounds();
+        pathLine.forEach(p => bounds.extend(p));
+        map.fitBounds(bounds);
+
+        const safetyWarning = document.getElementById('safety-warning');
+        safetyWarning.classList.remove('hidden');
+        setTimeout(() => safetyWarning.classList.add('hidden'), 5000);
+
+        return; // Detenemos la función para que no llame a Google Maps
+    }
 
     directionsService.route(
         {
@@ -403,6 +546,10 @@ function calculateAndDisplayRoute(origin, destInfo, originName) {
 function clearMap() {
     if (startMarker) startMarker.setMap(null);
     if (endMarker) endMarker.setMap(null);
+    if (customPolyline) {
+        customPolyline.setMap(null);
+        customPolyline = null;
+    }
     directionsRenderer.setDirections({ routes: [] });
 }
 
@@ -461,6 +608,7 @@ function setupEventListeners() {
     // Origin Selector Listeners
     document.getElementById('btn-origin-default').addEventListener('click', () => {
         globalOrigin = 'default';
+        localStorage.setItem('globalOrigin', 'default');
         document.getElementById('btn-origin-default').classList.add('active');
         document.getElementById('btn-origin-user').classList.remove('active');
 
@@ -473,6 +621,7 @@ function setupEventListeners() {
 
     document.getElementById('btn-origin-user').addEventListener('click', () => {
         globalOrigin = 'user';
+        localStorage.setItem('globalOrigin', 'user');
         document.getElementById('btn-origin-user').classList.add('active');
         document.getElementById('btn-origin-default').classList.remove('active');
         tryToGetLocation(); // Asegurar que tenemos GPS
