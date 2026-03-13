@@ -486,8 +486,9 @@ function getDist(p1, p2) {
 function calculateAndDisplayRoute(origin, destInfo, originName) {
     if (!destInfo) return;
 
-    // Si tiene un camino manual definido, lo dibujamos a mano
-    if (destInfo.customPath && destInfo.customPath.length > 0) {
+    // Si tiene un camino manual definido, y el origen es Rectoría/P.B., lo dibujamos a mano.
+    // Si el usuario eligió cualquier otro origen (como su ubicación actual o el Auditorio), usamos Google Maps normal.
+    if ((originName === "Plaza las Banderas" || originName === "P.B.") && destInfo.customPath && destInfo.customPath.length > 0) {
         clearMap();
 
         // Si el origen NO es Rectoría/Plaza, lo conectamos también (opcional)
@@ -511,8 +512,12 @@ function calculateAndDisplayRoute(origin, destInfo, originName) {
         map.fitBounds(bounds);
 
         const safetyWarning = document.getElementById('safety-warning');
+        const warningText = safetyWarning.querySelector('p');
+        if (warningText) {
+            warningText.textContent = originName === "Tú" ? "La ruta es de Google.Maps" : "¡Camina con cuidado!";
+        }
         safetyWarning.classList.remove('hidden');
-        setTimeout(() => safetyWarning.classList.add('hidden'), 5000);
+        setTimeout(() => safetyWarning.classList.add('hidden'), 10000);
 
         return; // Detenemos la función para que no llame a Google Maps
     }
@@ -531,8 +536,12 @@ function calculateAndDisplayRoute(origin, destInfo, originName) {
                 endMarker = createCustomMarker(destInfo.location, destInfo.buildingCode, destInfo.name);
 
                 const safetyWarning = document.getElementById('safety-warning');
+                const warningText = safetyWarning.querySelector('p');
+                if (warningText) {
+                    warningText.textContent = originName === "Tú" ? "La ruta es de Google.Maps" : "¡Camina con cuidado!";
+                }
                 safetyWarning.classList.remove('hidden');
-                setTimeout(() => safetyWarning.classList.add('hidden'), 5000);
+                setTimeout(() => safetyWarning.classList.add('hidden'), 10000);
             } else {
                 console.error("Fallo de ruta:", status);
                 if (status !== "OK" && originName === "Tú") {
