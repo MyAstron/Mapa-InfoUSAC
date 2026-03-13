@@ -1,53 +1,86 @@
 # Mapa Guía Info-USAC 🗺️
 
-Sistema interactivo de rutas universitarias diseñado para el campus central de la Universidad de San Carlos de Guatemala. Optimizado para dispositivos móviles y enfocado en la seguridad y orientación del estudiante sancarlista.
+Sistema interactivo de navegación inteligente diseñado para orientar a la comunidad universitaria en el campus central de la Universidad de San Carlos de Guatemala (USAC). 
 
-## ✨ Características Principales
-- **Doble Modo de Navegación:**
-    - **Auditorios:** Rutas fijas desde Plaza las Banderas hacia los principales auditorios con tiempos estimados de caminata.
-    - **Recorridos Guided Tour:** Sistema inteligente que detecta tu ubicación y te guía punto a punto por lugares clave (SUN, Bienestar, Registro).
-- **Auto-Marcado Inteligente:** En el modo Recorridos, los puntos se completan automáticamente al detectar que estás a menos de 30 metros del objetivo.
-- **Enfoque Móvil Premium:** Interfaz adaptativa ultra-compacta con menús inteligentes y tipografía moderna (Outfit).
-- **Mapa Limpio y Seguro:** Visualización simplificada sin distracciones externas y avisos de seguridad activos durante la navegación.
-- **Privacidad de API:** Sistema de carga dinámica de credenciales con protección contra caché (Cache Busting).
-
-## 🎬 Demostración de Uso
-![Grabación de uso](./assets/usage_demo.webp)
-*Vista rápida del funcionamiento en escritorio y móvil.*
-
-![Vista Móvil](./assets/mobile_view.png)
-*Interfaz optimizada para dispositivos móviles.*
-
-## 📁 Estructura del Código
-- `index.html`: Estructura base con selector de modos y contenedores dinámicos.
-- `assets/style.css`: Diseño premium, sistema de glassmorphism y adaptabilidad móvil total.
-- `assets/app.js`: Lógica core (Carga de Google Maps, Directions API, lógica de proximidad y gestión de estados).
-- `assets/config.js`: Archivo privado para la API Key de Google Maps.
-- `assets/logo.png`: Identidad visual minimalista.
-
-## 🛠️ Configuración y Seguridad
-
-Para proteger tu cuota de Google Cloud y mantener la navegación funcional:
-
-1. **API Key de Google Maps:**
-   - Consigue una llave en [Google Cloud Console](https://console.cloud.google.com/).
-   - Habilita **Maps JavaScript API** y **Directions API**.
-
-2. **Configuración Local:**
-   - Edita el archivo `assets/config.js`.
-   - Coloca tu llave en la variable `googleMapsApiKey`:
-     ```javascript
-     const APP_CONFIG = {
-         googleMapsApiKey: "TU_LLAVE_AQUI"
-     };
-     ```
-   - **Nota:** El archivo `config.js` está excluido vía `.gitignore` por seguridad.
-
-## 🚶 Uso
-1. Abre la aplicación en tu navegador.
-2. Elige el modo según tu necesidad (**Auditorios** o **Recorridos**).
-3. **Auditorios:** Selecciona un destino y verás el tiempo estimado (ej: 3 min) y la ruta desde Plaza las Banderas.
-4. **Recorridos:** Permite el acceso a tu ubicación. El sistema te llevará al punto más cercano. Al terminar, usa el botón "Finalizar en Plaza las Banderas" para reiniciar el tour.
+Este sistema no solo traza rutas, sino que **entiende tu contexto** y te guía de forma segura hacia tu destino.
 
 ---
-Diseñado para la comunidad sancarlista por **Info-USAC** @ 2026 Chalecos Cafe.
+
+## 🚀 Características Principales
+
+### 🔴 Doble Motor de Navegación
+1. **Modo Auditorios (Smart Origin):** 
+   - **Flexibilidad de Inicio:** Elige entre salir desde el punto neurálgico (**Plaza las Banderas**) o usar tu **Ubicación en Tiempo Real**.
+   - Selección rápida de facultades y auditorios principales.
+   - Estimación real del tiempo de caminata y trazado dinámico que se actualiza mientras te mueves.
+2. **Modo Recorridos (Smart Tour):**
+   - Sistema dinámico mediante checklist para trámites administrativos (SUN, Bienestar, Registro).
+   - **Proximidad Inteligente:** Los puntos se marcan solos cuando estás cerca (radio de ~30m).
+   - Guía adaptativa: Te sugiere siempre el punto más cercano a tu ubicación actual.
+
+### 📱 Experiencia de Usuario Premium
+- **Interfaz Adaptativa:** Sidebar colapsable que se transforma en un menú desplegable inteligente en dispositivos móviles.
+- **Visualización Limpia:** Mapa personalizado que oculta distracciones (negocios externos, tráfico innecesario) para enfocarse en el campus.
+- **Seguridad Activa:** Notificaciones flotantes de precaución al iniciar cualquier trayecto.
+- **Estética "Dark Mode":** Diseño elegante con contrastes en azul profundo y dorado universitario.
+
+---
+
+## 📸 Previsualización
+
+| Vista Escritorio | Vista Móvil |
+| :--- | :--- |
+| ![Uso en Escritorio](./assets/usage_demo.webp) | ![Uso en Móvil](./assets/mobile_view.png) |
+
+---
+
+## 🛠️ Stack Tecnológico
+
+- **Core:** JavaScript ES6+ (Vanilla)
+- **Maps API:** Google Maps JavaScript API (Directions Service, Directions Renderer)
+- **Styling:** CSS3 con variables dinámicas, Flexbox y Glassmorphism.
+- **Geolocalización:** HTML5 Geolocation API para seguimiento en tiempo real.
+
+---
+
+## ⚙️ Configuración y Despliegue
+
+El sistema está diseñado para ser ligero y fácil de configurar:
+
+1. **Obtén tu API Key:**
+   - Ve a [Google Cloud Console](https://console.cloud.google.com/).
+   - Activa las APIs: `Maps JavaScript API` y `Directions API`.
+
+2. **Configura las credenciales:**
+   - Localiza el archivo `assets/config.js`.
+   - Inserta tu llave:
+     ```javascript
+     const APP_CONFIG = {
+         googleMapsApiKey: "TU_API_KEY_AQUI"
+     };
+     ```
+
+3. **Ejecución:**
+   - No requiere servidor backend. Simplemente abre `index.html` en un navegador moderno.
+
+---
+
+## 📂 Estructura del Proyecto
+
+- `index.html`: Punto de entrada y contenedor de la interfaz.
+- `assets/app.js`: Cerebro de la aplicación (Lógica de mapas, geocercas y gestión de estados).
+- `assets/style.css`: Capa estética y responsividad móvil.
+- `assets/config.js`: Gestión de configuración sensible (Excluido de Git).
+- `assets/logo.png`: Identidad visual del proyecto.
+
+---
+
+## 🚶 Guía de Uso Rápido
+
+1. **¿Buscas un Auditorio?** Selecciónalo en la lista izquierda. Verás la ruta azul desde Rectoría.
+2. **¿Haces trámites?** Cambia a "Recorridos". Camina hacia los puntos; el sistema actualizará tu progreso automáticamente.
+3. **¿Terminaste?** El botón "Finalizar en Plaza las Banderas" te regresará al punto de inicio seguro.
+
+---
+Diseñado con ❤️ para la comunidad sancarlista por **Info-USAC** @ 2026 Chalecos Cafe ☕.
+

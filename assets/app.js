@@ -80,6 +80,15 @@ const CONFIG = {
             description: "Edificio S-8, salon 109",
             walkingTime: "7 min",
             visible: true
+        },
+        {
+            id: 8,
+            name: "Derecho (S7)",
+            buildingCode: "S7",
+            location: { lat: 14.586204011811052, lng: -90.5502677026757 },
+            description: "Edificio S-7",
+            walkingTime: "7 min",
+            visible: true
         }
     ],
     tourSpots: [
@@ -88,21 +97,24 @@ const CONFIG = {
             name: "SUN / Biblioteca / Enfermería",
             buildingCode: "SUN",
             location: { lat: 14.586964160055231, lng: -90.55209441363546 },
-            completed: false
+            completed: false,
+            info: "Aquí puedes realizar trámites de salud, biblioteca y exámenes de ubicación."
         },
         {
             id: 'bienestar',
             name: "Bienestar Estudiantil",
             buildingCode: "B.E",
             location: { lat: 14.58720002994269, lng: -90.55072724583526 },
-            completed: false
+            completed: false,
+            info: "Encargado de becas, apoyo psicopedagógico y programas deportivos."
         },
         {
             id: 'rye',
             name: "RYE (Registro) / DIGA",
             buildingCode: "RYE",
             location: { lat: 14.588048349592093, lng: -90.55072829187868 },
-            completed: false
+            completed: false,
+            info: "Trámites de inscripción, certificaciones y carnés universitarios."
         }
     ]
 };
@@ -114,6 +126,7 @@ let startMarker;
 let endMarker;
 let userLocation = CONFIG.startLocation;
 let currentMode = 'auditorios';
+let globalOrigin = 'default'; // 'default' or 'user'
 
 function initMap() {
     directionsService = new google.maps.DirectionsService();
@@ -162,6 +175,8 @@ function tryToGetLocation() {
                 };
                 if (currentMode === 'recorridos') {
                     checkTourProgress();
+                } else if (currentMode === 'auditorios' && globalOrigin === 'user') {
+                    refreshCurrentRoute();
                 }
             },
             () => console.log("Error al obtener ubicación técnica."),
@@ -210,8 +225,9 @@ function renderDestinationList() {
             <p>${dest.description}</p>
         `;
         li.addEventListener('click', () => {
-            // Auditorio: Origen fijo Plaza las Banderas
-            calculateAndDisplayRoute(CONFIG.startLocation, dest, "Plaza las Banderas");
+            const origin = globalOrigin === 'default' ? CONFIG.startLocation : userLocation;
+            const originName = globalOrigin === 'default' ? "Plaza las Banderas" : "Tú";
+            calculateAndDisplayRoute(origin, dest, originName);
             updateActiveState(li);
         });
         list.appendChild(li);
@@ -232,21 +248,57 @@ function renderTourList() {
         const li = document.createElement('li');
         li.className = `checklist-item ${spot.completed ? 'completed' : ''}`;
         li.innerHTML = `
-            <input type="checkbox" ${spot.completed ? 'checked' : ''}>
-            <span>${spot.name}</span>
+            <div class="checklist-main">
+                <input type="checkbox" ${spot.completed ? 'checked' : ''}>
+                <span>${spot.name}</span>
+            </div>
+            <div class="info-wrapper">
+                <button class="tour-info-btn" title="Más información">(!)</button>
+                <div class="tour-tooltip">${spot.info}</div>
+            </div>
         `;
 
         li.addEventListener('click', (e) => {
             const checkbox = li.querySelector('input');
+            const infoBtn = li.querySelector('.tour-info-btn');
+            const tooltip = li.querySelector('.tour-tooltip');
+
+            // Si se hace clic en el botón de info o en el tooltip, no marcar checkbox
+            if (e.target === infoBtn || tooltip.contains(e.target)) {
+                return;
+            }
+
             if (e.target.tagName !== 'INPUT') {
                 checkbox.checked = !checkbox.checked;
             }
+
             spot.completed = checkbox.checked;
             li.classList.toggle('completed', spot.completed);
             checkTourProgress();
         });
 
+        const infoBtn = li.querySelector('.tour-info-btn');
+        const tooltip = li.querySelector('.tour-tooltip');
+
+        if (infoBtn) {
+            infoBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Cerrar otros tooltips primero
+                document.querySelectorAll('.tour-tooltip').forEach(t => {
+                    if (t !== tooltip) t.classList.remove('visible');
+                });
+                tooltip.classList.toggle('visible');
+            });
+        }
+
         list.appendChild(li);
+    });
+
+    // Cerrar tooltips al hacer clic fuera
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.info-wrapper')) {
+            document.querySelectorAll('.tour-tooltip').forEach(t => t.classList.remove('visible'));
+        }
     });
 }
 
@@ -276,18 +328,31 @@ function checkTourProgress() {
     document.getElementById('tour-final').classList.toggle('hidden', !allDone);
 
     if (!allDone) {
-        // Sugerir el más cercano de los pendientes usando userLocation
+        // Sugerir el más cercano de los pendientes
+        // Siempre usamos userLocation para buscar el "más cercano", 
+        // pero el origen de la ruta respetará el selector global si es necesario.
         const nearest = findNearest(userLocation, pending);
         if (nearest) {
-            calculateAndDisplayRoute(userLocation, nearest, "Tú");
+            const origin = globalOrigin === 'default' ? CONFIG.startLocation : userLocation;
+            const originName = globalOrigin === 'default' ? "P.B." : "Tú";
+            calculateAndDisplayRoute(origin, nearest, originName);
         }
     } else {
-        // Si todo está completo, mostrar ruta a Plaza las Banderas
-        calculateAndDisplayRoute(userLocation, {
-            location: CONFIG.startLocation,
-            buildingCode: "P.B",
-            name: "Plaza las Banderas"
-        }, "Tú");
+        // Si todo está completo, volver a Plaza las Banderas
+        // Si ya estamos en Plaza las Banderas (default origin), no hace falta mostrar ruta DE Plaza las Banderas A Plaza las Banderas
+        const origin = globalOrigin === 'default' ? CONFIG.startLocation : userLocation;
+        const originName = globalOrigin === 'default' ? "P.B." : "Tú";
+
+        if (globalOrigin === 'user') {
+            calculateAndDisplayRoute(userLocation, {
+                location: CONFIG.startLocation,
+                buildingCode: "P.B",
+                name: "Plaza las Banderas"
+            }, "Tú");
+        } else {
+            clearMap();
+            createCustomMarker(CONFIG.startLocation, "P.B.", "Plaza las Banderas");
+        }
     }
 }
 
@@ -385,9 +450,56 @@ function setupEventListeners() {
         select.addEventListener('change', (e) => {
             const dest = CONFIG.destinations.find(d => d.id == e.target.value);
             if (dest) {
-                calculateAndDisplayRoute(CONFIG.startLocation, dest, "Plaza las Banderas");
+                const origin = globalOrigin === 'default' ? CONFIG.startLocation : userLocation;
+                const originName = globalOrigin === 'default' ? "Plaza las Banderas" : "Tú";
+                calculateAndDisplayRoute(origin, dest, originName);
                 updateActiveState(e.target.value);
             }
         });
+    }
+
+    // Origin Selector Listeners
+    document.getElementById('btn-origin-default').addEventListener('click', () => {
+        globalOrigin = 'default';
+        document.getElementById('btn-origin-default').classList.add('active');
+        document.getElementById('btn-origin-user').classList.remove('active');
+
+        if (currentMode === 'auditorios') {
+            refreshCurrentRoute();
+        } else {
+            checkTourProgress();
+        }
+    });
+
+    document.getElementById('btn-origin-user').addEventListener('click', () => {
+        globalOrigin = 'user';
+        document.getElementById('btn-origin-user').classList.add('active');
+        document.getElementById('btn-origin-default').classList.remove('active');
+        tryToGetLocation(); // Asegurar que tenemos GPS
+
+        if (currentMode === 'auditorios') {
+            refreshCurrentRoute();
+        } else {
+            checkTourProgress();
+        }
+    });
+}
+
+function refreshCurrentRoute() {
+    const activeItem = document.querySelector('.destination-item.active');
+    const select = document.getElementById('destination-select');
+    let destId = null;
+
+    if (activeItem) {
+        destId = activeItem.dataset.id;
+    } else if (select && select.value) {
+        destId = select.value;
+    }
+
+    if (destId) {
+        const dest = CONFIG.destinations.find(d => d.id == destId);
+        const origin = globalOrigin === 'default' ? CONFIG.startLocation : userLocation;
+        const originName = globalOrigin === 'default' ? "Plaza las Banderas" : "Tú";
+        calculateAndDisplayRoute(origin, dest, originName);
     }
 }
